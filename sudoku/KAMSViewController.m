@@ -46,7 +46,7 @@ static float NUM_PAD_HEIGHT_FACTOR = 1.0 / 7;
     // Dispose of any resources that can be recreated.
 }
 
-- (void)gridCellSelectedAtRow:(NSNumber*)row column:(NSNumber*)column
+- (void)gridCellSelectedAtRow:(NSNumber*)row atColumn:(NSNumber*)column
 {
     int rowIntVal = [row intValue];
     int colIntVal = [column intValue];
@@ -77,7 +77,7 @@ static float NUM_PAD_HEIGHT_FACTOR = 1.0 / 7;
     
     _gridView = [[KAMSGridView alloc] initWithFrame:gridFrame];
     
-    [_gridView setTarget:self action:@selector(gridCellSelectedAtRow:column:)];
+    [_gridView setTarget:self action:@selector(gridCellSelectedAtRow:atColumn:)];
     [self.view addSubview:_gridView];
 }
 
