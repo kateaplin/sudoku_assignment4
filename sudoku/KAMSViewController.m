@@ -32,18 +32,41 @@ static float NUM_PAD_HEIGHT_FACTOR = 1.0 / 7;
     [super viewDidLoad];
 	// Do any additional setup after loading the view, typically from a nib.
     
-    [self initializeGridView];
-    
-    [self initializeGridModel];
-    [self setInitialGridValues];
-    
-    [self initializeNumPadView];
+    [self startGame];
 }
 
 - (void)didReceiveMemoryWarning
 {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
+}
+
+- (void) startGame
+{
+    [self initializeGridView];
+    [self initializeNumPadView];
+    [self startRound];
+}
+
+-(void) startRound
+{
+    [_gridView clearCells];
+    [self initializeGridModel];
+    [self setInitialGridValues];
+}
+
+-(void) endRound
+{
+    NSLog(@"inside end round");
+    UIAlertView *winMessage = [[UIAlertView alloc] initWithTitle:@"title!" message:@"message" delegate:self cancelButtonTitle:@"cancel" otherButtonTitles: nil];
+    [winMessage show];
+    
+}
+
+- (void)alertView:(UIAlertView *)alertView
+didDismissWithButtonIndex:(NSInteger)buttonIndex
+{
+    [self startRound];
 }
 
 - (void)gridCellSelectedAtRow:(NSNumber*)row atColumn:(NSNumber*)column
@@ -59,6 +82,10 @@ static float NUM_PAD_HEIGHT_FACTOR = 1.0 / 7;
                 toValue:selectedNumber];
             [_gridView setValueAtRow:rowIntVal atColumn:colIntVal
                 toValue:selectedNumber];
+            
+            if ([_gridModel isGridFull]) {
+                [self endRound];
+            }
         }
     }
 }

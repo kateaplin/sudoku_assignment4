@@ -13,5 +13,5 @@
 -(void) setValueAtRow:(int)row atColumn:(int)column toValue:(int)value;
 -(void) setInitialValueAtRow:(int)row atColumn:(int)column toValue:(int)value;
 -(void) setTarget:(id)target action:(SEL)action;
-
+-(void)clearCells;
 @end

@@ -26,6 +26,19 @@ static int INITIAL_GRID[9][9] = {
     {8, 0, 0, 3, 0, 2, 7, 4, 0}
 };
 
+# warning Delete initial grid 2 at the end s
+//static int INITIAL_GRID_2[9][9] = {
+//    {7, 6, 5, 4, 2, 3, 8, 1, 9},
+//    {1, 3, 9, 5, 7, 8, 2 ,6, 4},
+//    {4, 2, 8, 6, 9, 1, 5, 7, 3},
+//    {6, 5, 7, 2, 8, 9, 4, 3, 1},
+//    {2, 8, 4, 1, 3, 6, 9, 5, 7},
+//    {9, 1, 3, 7, 4, 5, 6, 2, 8},
+//    {5, 7, 1, 8, 6, 4, 3, 9, 2},
+//    {3, 4, 2, 9, 5, 7, 1, 8, 6},
+//    {8, 9, 6, 3, 1, 2, 7, 4, 0}
+//};
+
 @interface KAMSGridModel () {
     int _initialGrid[9][9];
     int _currentGrid[9][9];
@@ -34,6 +47,7 @@ static int INITIAL_GRID[9][9] = {
 @end
 
 @implementation KAMSGridModel
+
 
 /**
  * Generates a playable sudoku grid.
@@ -91,7 +105,6 @@ static int INITIAL_GRID[9][9] = {
     return rowConsistent && colConsistent && blockConsistent;
 }
 
-
 -(BOOL) isRowConsistentAtRow:(int)row forValue:(int) value
 {
     for (int col = 0; col < 9; col++) {
@@ -120,6 +133,21 @@ static int INITIAL_GRID[9][9] = {
     for (int row = startingRow; row < (startingRow + 3); row++) {
         for (int col = startingCol; col < (startingCol + 3); col++) {
             if ([self getValueAtRow:row atColumn:col] == value) {
+                return NO;
+            }
+        }
+    }
+    return YES;
+}
+
+/**
+ * Checks whether there are any unfilled cells
+ */
+-(BOOL)isGridFull
+{
+    for (int row = 0; row < 9; row++) {
+        for (int col = 0; col < 9; col++) {
+            if (_currentGrid[row][col] == 0) {
                 return NO;
             }
         }

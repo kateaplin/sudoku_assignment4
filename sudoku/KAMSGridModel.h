@@ -15,5 +15,5 @@
 -(void) setValueAtRow:(int)row atColumn:(int)column toValue:(int)value;
 -(BOOL) isMutableAtRow:(int)row atColumn:(int)column;
 -(BOOL) isConsistentAtRow:(int)row atColumn:(int)column forValue:(int)value;
-
+-(BOOL) isGridFull;
 @end
