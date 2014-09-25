@@ -11,6 +11,8 @@
 		2905408519CE7AA10051540A /* KAMSGridModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 2905408319CE7A890051540A /* KAMSGridModel.m */; };
 		2905408B19CE84510051540A /* KAMSNumPadView.m in Sources */ = {isa = PBXBuildFile; fileRef = 2905408A19CE84510051540A /* KAMSNumPadView.m */; };
 		29B388B919CFD0BB00968289 /* KAMSSolidImageUtility.m in Sources */ = {isa = PBXBuildFile; fileRef = 29B388B819CFD0BB00968289 /* KAMSSolidImageUtility.m */; };
+		29D9317119D4CF5100FA17D6 /* KAMSGridGenerator.m in Sources */ = {isa = PBXBuildFile; fileRef = 29D9317019D4CF5100FA17D6 /* KAMSGridGenerator.m */; };
+		29D9317219D4CF6300FA17D6 /* KAMSGridGenerator.m in Sources */ = {isa = PBXBuildFile; fileRef = 29D9317019D4CF5100FA17D6 /* KAMSGridGenerator.m */; };
 		AFB4C53F19C25C7600AE4A44 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = AFB4C53E19C25C7600AE4A44 /* Foundation.framework */; };
 		AFB4C54119C25C7600AE4A44 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = AFB4C54019C25C7600AE4A44 /* CoreGraphics.framework */; };
 		AFB4C54319C25C7600AE4A44 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = AFB4C54219C25C7600AE4A44 /* UIKit.framework */; };
@@ -45,6 +47,8 @@
 		2905408A19CE84510051540A /* KAMSNumPadView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = KAMSNumPadView.m; sourceTree = "<group>"; };
 		29B388B719CFD0BB00968289 /* KAMSSolidImageUtility.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = KAMSSolidImageUtility.h; sourceTree = "<group>"; };
 		29B388B819CFD0BB00968289 /* KAMSSolidImageUtility.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = KAMSSolidImageUtility.m; sourceTree = "<group>"; };
+		29D9316F19D4CF5100FA17D6 /* KAMSGridGenerator.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = KAMSGridGenerator.h; sourceTree = "<group>"; };
+		29D9317019D4CF5100FA17D6 /* KAMSGridGenerator.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = KAMSGridGenerator.m; sourceTree = "<group>"; };
 		AFB4C53B19C25C7600AE4A44 /* sudoku.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = sudoku.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		AFB4C53E19C25C7600AE4A44 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
 		AFB4C54019C25C7600AE4A44 /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
@@ -140,6 +144,8 @@
 				2905408A19CE84510051540A /* KAMSNumPadView.m */,
 				29B388B719CFD0BB00968289 /* KAMSSolidImageUtility.h */,
 				29B388B819CFD0BB00968289 /* KAMSSolidImageUtility.m */,
+				29D9316F19D4CF5100FA17D6 /* KAMSGridGenerator.h */,
+				29D9317019D4CF5100FA17D6 /* KAMSGridGenerator.m */,
 			);
 			path = sudoku;
 			sourceTree = "<group>";
@@ -278,6 +284,7 @@
 				2905408419CE7A890051540A /* KAMSGridModel.m in Sources */,
 				AFE855E819C3788500140CA8 /* KAMSGridView.m in Sources */,
 				AFB4C54B19C25C7600AE4A44 /* main.m in Sources */,
+				29D9317119D4CF5100FA17D6 /* KAMSGridGenerator.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -287,6 +294,7 @@
 			files = (
 				AFB4C56A19C25C7600AE4A44 /* sudokuTests.m in Sources */,
 				2905408519CE7AA10051540A /* KAMSGridModel.m in Sources */,
+				29D9317219D4CF6300FA17D6 /* KAMSGridGenerator.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
