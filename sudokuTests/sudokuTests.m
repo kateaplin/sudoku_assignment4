@@ -41,12 +41,12 @@ static int INITIAL_GRID[9][9] = {
 }
 
 /**
- * Tests generateGrid and getValueAtRowCol functions in Grid Model class by
+ * Tests getValueAtRowCol functions in Grid Model class by
  * verifying initial values.
  */
--(void)testGenerateGridAndGetValueAtRowCol
+-(void)testGetValueAtRowCol
 {
-    [_testGridModel generateGrid];
+    [_testGridModel useGrid:INITIAL_GRID];
     for (int row = 0; row < 9; row++) {
         for (int col = 0; col < 9; col++) {
             int testGridModelValue = [_testGridModel
@@ -82,7 +82,7 @@ static int INITIAL_GRID[9][9] = {
  */
 -(void)testIsMutableAtRowColForKnownMutable
 {
-    [_testGridModel generateGrid];
+    [_testGridModel useGrid:INITIAL_GRID];
     
     XCTAssertTrue([_testGridModel isMutableAtRow:0 atColumn:1] == YES,
         @"Checking a known mutable value in the grid.");
@@ -94,7 +94,7 @@ static int INITIAL_GRID[9][9] = {
  */
 -(void)testIsMutableAtRowColForKnownImmutable
 {
-    [_testGridModel generateGrid];
+    [_testGridModel useGrid:INITIAL_GRID];
     
     XCTAssertTrue([_testGridModel isMutableAtRow:0 atColumn:0] == NO,
         @"Checking a known mutable value in the grid.");
@@ -106,7 +106,7 @@ static int INITIAL_GRID[9][9] = {
  */
 -(void)testIsConsistentAtRowColForKnownConsistentValue
 {
-    [_testGridModel generateGrid];
+    [_testGridModel useGrid:INITIAL_GRID];
     XCTAssertTrue(
         [_testGridModel isConsistentAtRow:0 atColumn:1 forValue:3] == YES,
         @"Check consistency for known consistent value and location.");
@@ -119,9 +119,9 @@ static int INITIAL_GRID[9][9] = {
  */
 -(void)testIsConsistentAtRowColForKnownInconsistentValueAtRow
 {
-    [_testGridModel generateGrid];
+    [_testGridModel useGrid:INITIAL_GRID];
     XCTAssertTrue(
-        [_testGridModel isConsistentAtRow:1 atColumn:0 forValue:5] == NO,
+        [_testGridModel isRowConsistentAtRow:1 forValue:5] == NO,
         @"Check consistency for known inconsistent value for row.");
 }
 
@@ -131,9 +131,9 @@ static int INITIAL_GRID[9][9] = {
  */
 -(void)testIsConsistentAtRowColForKnownInconsistentValueAtCol
 {
-    [_testGridModel generateGrid];
+    [_testGridModel useGrid:INITIAL_GRID];
     XCTAssertTrue(
-        [_testGridModel isConsistentAtRow:0 atColumn:1 forValue:5] == NO,
+        [_testGridModel isColumnConsistentAtColumn:1 forValue:5] == NO,
         @"Check consistency for known inconsistent value for column.");
 }
 
@@ -143,9 +143,9 @@ static int INITIAL_GRID[9][9] = {
  */
 -(void)testIsConsistentAtRowColForKnownInconsistentValueAtBlock
 {
-    [_testGridModel generateGrid];
+    [_testGridModel useGrid:INITIAL_GRID];
     XCTAssertTrue(
-        [_testGridModel isConsistentAtRow:1 atColumn:0 forValue:2] == NO,
+        [_testGridModel isBlockConsistentAtRow:1 atColumn:0 forValue:2] == NO,
         @"Check consistency for known inconsistent value for block.");
 }
 @end

@@ -65,6 +65,19 @@ static int INITIAL_GRID[9][9] = {
 }
 
 /**
+ * Forces the Grid Model to use a given grid.
+ */
+-(void) useGrid:(int[9][9])grid
+{
+    for (int row = 0; row < 9; row++) {
+        for (int col = 0; col < 9; col++) {
+            _initialGrid[row][col] = grid[row][col];
+            _currentGrid[row][col] = _initialGrid[row][col];
+        }
+    }
+}
+
+/**
  * Gets the value of the current grid at the given coordinates.
  */
 -(int) getValueAtRow:(int)row atColumn:(int)column
@@ -105,7 +118,10 @@ static int INITIAL_GRID[9][9] = {
     return rowConsistent && colConsistent && blockConsistent;
 }
 
--(BOOL) isRowConsistentAtRow:(int)row forValue:(int) value
+/**
+ * Checks the given value at the given coordiates for Sudoku row consistency.
+ */
+-(BOOL) isRowConsistentAtRow:(int)row forValue:(int)value
 {
     for (int col = 0; col < 9; col++) {
         if ([self getValueAtRow:row atColumn:col] == value) {
@@ -115,7 +131,10 @@ static int INITIAL_GRID[9][9] = {
     return YES;
 }
 
--(BOOL) isColumnConsistentAtColumn:(int)column forValue:(int) value
+/**
+ * Checks the given value at the given coordiates for Sudoku column consistency.
+ */
+-(BOOL) isColumnConsistentAtColumn:(int)column forValue:(int)value
 {
     for (int row = 0; row < 9; row++) {
         if ([self getValueAtRow:row atColumn:column] == value) {
@@ -125,7 +144,10 @@ static int INITIAL_GRID[9][9] = {
     return YES;
 }
 
--(BOOL) isBlockConsistentAtRow:(int)row atColumn:(int)column forValue:(int) value
+/**
+ * Checks the given value at the given coordiates for Sudoku block consistency.
+ */
+-(BOOL) isBlockConsistentAtRow:(int)row atColumn:(int)column forValue:(int)value
 {
     int startingCol = (column / 3) * 3;
     int startingRow = (row / 3) * 3;
