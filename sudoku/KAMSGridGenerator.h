@@ -10,4 +10,6 @@
 
 @interface KAMSGridGenerator : NSObject
 
++(NSMutableArray*) generateGrid;
+
 @end
