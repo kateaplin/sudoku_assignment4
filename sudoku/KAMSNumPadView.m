@@ -65,7 +65,8 @@ static float BORDER_RATIO = 0.5;
 
 - (void)cellSelected:(id)sender
 {
-    [self setCellActive:[sender tag]];
+    int selectedNumber = (int)[sender tag];
+    [self setCellActive:selectedNumber];
 }
 
 -(void)setCellActive:(int)newCellIndex

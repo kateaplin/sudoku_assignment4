@@ -12,16 +12,47 @@
 
 + (NSMutableArray*) generateGrid
 {
+    NSString *readString = [KAMSGridGenerator readFromRandomFile];
+    NSString *randomLine = [KAMSGridGenerator getRandomLine:readString];
+    return [KAMSGridGenerator parseLine:randomLine];
+}
+
++ (NSString*) readFromRandomFile
+{
+    int fileNum = (arc4random() % 2) + 1;
+    NSString *fileName = [[NSString alloc] initWithFormat:@"grid%d", fileNum];
+    NSString *path = [[NSBundle mainBundle] pathForResource:fileName
+        ofType:@"txt"];
+    NSError *error;
+    NSString *readString = [[NSString alloc] initWithContentsOfFile:path
+        encoding:NSUTF8StringEncoding error:&error];
+    return readString;
+}
+
++ (NSMutableArray*) parseLine:(NSString*)sudokuLine
+{
     NSMutableArray *grid = [[NSMutableArray alloc] initWithCapacity:9];
     for (int row = 0; row < 9; row++) {
         NSMutableArray *rowArray = [[NSMutableArray alloc] initWithCapacity:9];
         for (int col = 0; col < 9; col++) {
-            [rowArray addObject:@0];
+            int index = row * 9 + col;
+            NSString *atIndex = [sudokuLine
+                substringWithRange:NSMakeRange(index, 1)];
+            NSInteger integer = [atIndex integerValue];
+            NSNumber *number = [NSNumber numberWithInteger:integer];
+            [rowArray addObject:number];
         }
         [grid addObject:rowArray];
     }
-#warning read values from file :)
     return grid;
+}
+
++ (NSString*) getRandomLine:(NSString*)allGrids
+{
+    NSArray *allLines = [allGrids componentsSeparatedByCharactersInSet:
+        [NSCharacterSet newlineCharacterSet]];
+    int lineNum = arc4random() % [allLines count];
+    return [allLines objectAtIndex:lineNum];
 }
 
 @end

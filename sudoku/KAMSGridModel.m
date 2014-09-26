@@ -9,38 +9,6 @@
 #import "KAMSGridModel.h"
 #import "KAMSGridGenerator.h"
 
-#warning delete before submission
-//// Initial grid provided in assignment 4.
-//// Note that we access this grid in row major order. This means that our
-//// displayed grid is the transpose of the screenshot in assignment 4. However,
-//// the screenshot assumed column major order, which C is not. Our grid then
-//// displays the transpose of the grid in the screenshot, so it is still a valid
-//// grid.
-//static int INITIAL_GRID[9][9] = {
-//    {7, 0, 0, 4, 2, 0, 0, 0, 9},
-//    {0, 0, 9, 5, 0, 0 ,0 ,0, 4},
-//    {0, 2, 0, 6, 9, 0, 5, 0, 0},
-//    {6, 5, 0, 0, 0, 0, 4, 3, 0},
-//    {0, 8, 0, 0, 0, 6, 0, 0, 7},
-//    {0, 1, 0, 0, 4, 5, 6, 0, 0},
-//    {0, 0, 0, 8, 6, 0, 0, 0, 2},
-//    {3, 4, 0, 9, 0, 0, 1, 0, 0},
-//    {8, 0, 0, 3, 0, 2, 7, 4, 0}
-//};
-
-# warning Delete initial grid 2 at the end s
-//static int INITIAL_GRID_2[9][9] = {
-//    {7, 6, 5, 4, 2, 3, 8, 1, 9},
-//    {1, 3, 9, 5, 7, 8, 2 ,6, 4},
-//    {4, 2, 8, 6, 9, 1, 5, 7, 3},
-//    {6, 5, 7, 2, 8, 9, 4, 3, 1},
-//    {2, 8, 4, 1, 3, 6, 9, 5, 7},
-//    {9, 1, 3, 7, 4, 5, 6, 2, 8},
-//    {5, 7, 1, 8, 6, 4, 3, 9, 2},
-//    {3, 4, 2, 9, 5, 7, 1, 8, 6},
-//    {8, 9, 6, 3, 1, 2, 7, 4, 0}
-//};
-
 @interface KAMSGridModel () {
     int _initialGrid[9][9];
     int _currentGrid[9][9];

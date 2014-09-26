@@ -132,9 +132,10 @@ static int NUM_SMALL_GRID_BORDERS = 6;
 {
     // Communicating with viewController.
     // First argument is row, second is column.
+    int selectedCell = (int)[sender tag];
     [_target performSelector:_action
-                  withObject:[NSNumber numberWithInt:[sender tag] % 10]
-                  withObject:[NSNumber numberWithInt:[sender tag] / 10]];
+                  withObject:[NSNumber numberWithInt:selectedCell % 10]
+                  withObject:[NSNumber numberWithInt:selectedCell / 10]];
 }
 
 + (int)verticalOffsetFromRow:(int)row forButtonSize:(CGFloat)buttonSize

@@ -16,6 +16,10 @@ static float GRID_FRAME_SIZE_FACTOR = 0.8;
 
 static float NUM_PAD_OFFSET_FACTOR = 0.1;
 static float NUM_PAD_HEIGHT_FACTOR = 1.0 / 7;
+static NSString *END_GAME_ALERT_TITLE = @"You've Won!";
+static NSString *END_GAME_ALERT_MESSAGE =
+    @"Press \"Play Again\" to start another round.";
+static NSString *END_GAME_ALERT_CANCEL_BUTTON_TITLE = @"Play Again?";
 
 @interface KAMSViewController () {
     KAMSGridView *_gridView;
@@ -57,10 +61,11 @@ static float NUM_PAD_HEIGHT_FACTOR = 1.0 / 7;
 
 -(void) endRound
 {
-    NSLog(@"inside end round");
-    UIAlertView *winMessage = [[UIAlertView alloc] initWithTitle:@"title!" message:@"message" delegate:self cancelButtonTitle:@"cancel" otherButtonTitles: nil];
+    UIAlertView *winMessage = [[UIAlertView alloc]
+        initWithTitle:END_GAME_ALERT_TITLE message:END_GAME_ALERT_MESSAGE
+        delegate:self cancelButtonTitle:END_GAME_ALERT_CANCEL_BUTTON_TITLE
+        otherButtonTitles: nil];
     [winMessage show];
-    
 }
 
 - (void)alertView:(UIAlertView *)alertView
@@ -104,7 +109,8 @@ didDismissWithButtonIndex:(NSInteger)buttonIndex
     
     _gridView = [[KAMSGridView alloc] initWithFrame:gridFrame];
     
-    [_gridView setTarget:self action:@selector(gridCellSelectedAtRow:atColumn:)];
+    [_gridView setTarget:self
+        action:@selector(gridCellSelectedAtRow:atColumn:)];
     [self.view addSubview:_gridView];
 }
 
