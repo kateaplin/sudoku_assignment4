@@ -7,10 +7,14 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		0F2E331319D5E3C6006BBD22 /* grid2.txt in Resources */ = {isa = PBXBuildFile; fileRef = 0F2E331119D5E3C6006BBD22 /* grid2.txt */; };
+		0F2E331419D5E3C6006BBD22 /* grid1.txt in Resources */ = {isa = PBXBuildFile; fileRef = 0F2E331219D5E3C6006BBD22 /* grid1.txt */; };
 		2905408419CE7A890051540A /* KAMSGridModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 2905408319CE7A890051540A /* KAMSGridModel.m */; };
 		2905408519CE7AA10051540A /* KAMSGridModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 2905408319CE7A890051540A /* KAMSGridModel.m */; };
 		2905408B19CE84510051540A /* KAMSNumPadView.m in Sources */ = {isa = PBXBuildFile; fileRef = 2905408A19CE84510051540A /* KAMSNumPadView.m */; };
 		29B388B919CFD0BB00968289 /* KAMSSolidImageUtility.m in Sources */ = {isa = PBXBuildFile; fileRef = 29B388B819CFD0BB00968289 /* KAMSSolidImageUtility.m */; };
+		29D9317119D4CF5100FA17D6 /* KAMSGridGenerator.m in Sources */ = {isa = PBXBuildFile; fileRef = 29D9317019D4CF5100FA17D6 /* KAMSGridGenerator.m */; };
+		29D9317219D4CF6300FA17D6 /* KAMSGridGenerator.m in Sources */ = {isa = PBXBuildFile; fileRef = 29D9317019D4CF5100FA17D6 /* KAMSGridGenerator.m */; };
 		AFB4C53F19C25C7600AE4A44 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = AFB4C53E19C25C7600AE4A44 /* Foundation.framework */; };
 		AFB4C54119C25C7600AE4A44 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = AFB4C54019C25C7600AE4A44 /* CoreGraphics.framework */; };
 		AFB4C54319C25C7600AE4A44 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = AFB4C54219C25C7600AE4A44 /* UIKit.framework */; };
@@ -39,12 +43,16 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		0F2E331119D5E3C6006BBD22 /* grid2.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = grid2.txt; sourceTree = "<group>"; };
+		0F2E331219D5E3C6006BBD22 /* grid1.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = grid1.txt; sourceTree = "<group>"; };
 		2905408219CE7A890051540A /* KAMSGridModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = KAMSGridModel.h; sourceTree = "<group>"; };
 		2905408319CE7A890051540A /* KAMSGridModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = KAMSGridModel.m; sourceTree = "<group>"; };
 		2905408919CE84510051540A /* KAMSNumPadView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = KAMSNumPadView.h; sourceTree = "<group>"; };
 		2905408A19CE84510051540A /* KAMSNumPadView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = KAMSNumPadView.m; sourceTree = "<group>"; };
 		29B388B719CFD0BB00968289 /* KAMSSolidImageUtility.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = KAMSSolidImageUtility.h; sourceTree = "<group>"; };
 		29B388B819CFD0BB00968289 /* KAMSSolidImageUtility.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = KAMSSolidImageUtility.m; sourceTree = "<group>"; };
+		29D9316F19D4CF5100FA17D6 /* KAMSGridGenerator.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = KAMSGridGenerator.h; sourceTree = "<group>"; };
+		29D9317019D4CF5100FA17D6 /* KAMSGridGenerator.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = KAMSGridGenerator.m; sourceTree = "<group>"; };
 		AFB4C53B19C25C7600AE4A44 /* sudoku.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = sudoku.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		AFB4C53E19C25C7600AE4A44 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
 		AFB4C54019C25C7600AE4A44 /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
@@ -140,6 +148,8 @@
 				2905408A19CE84510051540A /* KAMSNumPadView.m */,
 				29B388B719CFD0BB00968289 /* KAMSSolidImageUtility.h */,
 				29B388B819CFD0BB00968289 /* KAMSSolidImageUtility.m */,
+				29D9316F19D4CF5100FA17D6 /* KAMSGridGenerator.h */,
+				29D9317019D4CF5100FA17D6 /* KAMSGridGenerator.m */,
 			);
 			path = sudoku;
 			sourceTree = "<group>";
@@ -147,6 +157,8 @@
 		AFB4C54519C25C7600AE4A44 /* Supporting Files */ = {
 			isa = PBXGroup;
 			children = (
+				0F2E331119D5E3C6006BBD22 /* grid2.txt */,
+				0F2E331219D5E3C6006BBD22 /* grid1.txt */,
 				AFB4C54619C25C7600AE4A44 /* sudoku-Info.plist */,
 				AFB4C54719C25C7600AE4A44 /* InfoPlist.strings */,
 				AFB4C54A19C25C7600AE4A44 /* main.m */,
@@ -251,8 +263,10 @@
 			buildActionMask = 2147483647;
 			files = (
 				AFB4C55719C25C7600AE4A44 /* Images.xcassets in Resources */,
+				0F2E331419D5E3C6006BBD22 /* grid1.txt in Resources */,
 				AFB4C54919C25C7600AE4A44 /* InfoPlist.strings in Resources */,
 				AFB4C55219C25C7600AE4A44 /* Main.storyboard in Resources */,
+				0F2E331319D5E3C6006BBD22 /* grid2.txt in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -278,6 +292,7 @@
 				2905408419CE7A890051540A /* KAMSGridModel.m in Sources */,
 				AFE855E819C3788500140CA8 /* KAMSGridView.m in Sources */,
 				AFB4C54B19C25C7600AE4A44 /* main.m in Sources */,
+				29D9317119D4CF5100FA17D6 /* KAMSGridGenerator.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -287,6 +302,7 @@
 			files = (
 				AFB4C56A19C25C7600AE4A44 /* sudokuTests.m in Sources */,
 				2905408519CE7AA10051540A /* KAMSGridModel.m in Sources */,
+				29D9317219D4CF6300FA17D6 /* KAMSGridGenerator.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

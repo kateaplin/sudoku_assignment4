@@ -80,6 +80,20 @@ static int NUM_SMALL_GRID_BORDERS = 6;
 }
 
 /**
+ * Clears all the cells in the grid. 
+ */
+-(void)clearCells
+{
+    for (int row = 0; row < 9; row ++) {
+        for (int col = 0; col < 9; col++) {
+            UIButton *cell = [[_cells objectAtIndex:row] objectAtIndex:col];
+            [cell setEnabled:YES];
+            [cell setTitle:@"" forState:UIControlStateNormal];
+        }
+    }
+}
+
+/**
  * Sets the value of a cell at the given row, column to the given value.
  */
 - (void)setValueAtRow:(int)row atColumn:(int)column toValue:(int)value
@@ -118,9 +132,10 @@ static int NUM_SMALL_GRID_BORDERS = 6;
 {
     // Communicating with viewController.
     // First argument is row, second is column.
+    int selectedCell = (int)[sender tag];
     [_target performSelector:_action
-                  withObject:[NSNumber numberWithInt:[sender tag] % 10]
-                  withObject:[NSNumber numberWithInt:[sender tag] / 10]];
+                  withObject:[NSNumber numberWithInt:selectedCell % 10]
+                  withObject:[NSNumber numberWithInt:selectedCell / 10]];
 }
 
 + (int)verticalOffsetFromRow:(int)row forButtonSize:(CGFloat)buttonSize

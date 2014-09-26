@@ -8,6 +8,6 @@
 
 #import <UIKit/UIKit.h>
 
-@interface KAMSViewController : UIViewController
+@interface KAMSViewController : UIViewController <UIAlertViewDelegate>
 
 @end

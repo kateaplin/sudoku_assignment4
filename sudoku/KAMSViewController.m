@@ -16,6 +16,10 @@ static float GRID_FRAME_SIZE_FACTOR = 0.8;
 
 static float NUM_PAD_OFFSET_FACTOR = 0.1;
 static float NUM_PAD_HEIGHT_FACTOR = 1.0 / 7;
+static NSString *END_GAME_ALERT_TITLE = @"You've Won!";
+static NSString *END_GAME_ALERT_MESSAGE =
+    @"Press \"Play Again\" to start another round.";
+static NSString *END_GAME_ALERT_CANCEL_BUTTON_TITLE = @"Play Again?";
 
 @interface KAMSViewController () {
     KAMSGridView *_gridView;
@@ -32,18 +36,42 @@ static float NUM_PAD_HEIGHT_FACTOR = 1.0 / 7;
     [super viewDidLoad];
 	// Do any additional setup after loading the view, typically from a nib.
     
-    [self initializeGridView];
-    
-    [self initializeGridModel];
-    [self setInitialGridValues];
-    
-    [self initializeNumPadView];
+    [self startGame];
 }
 
 - (void)didReceiveMemoryWarning
 {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
+}
+
+- (void) startGame
+{
+    [self initializeGridView];
+    [self initializeNumPadView];
+    [self startRound];
+}
+
+-(void) startRound
+{
+    [_gridView clearCells];
+    [self initializeGridModel];
+    [self setInitialGridValues];
+}
+
+-(void) endRound
+{
+    UIAlertView *winMessage = [[UIAlertView alloc]
+        initWithTitle:END_GAME_ALERT_TITLE message:END_GAME_ALERT_MESSAGE
+        delegate:self cancelButtonTitle:END_GAME_ALERT_CANCEL_BUTTON_TITLE
+        otherButtonTitles: nil];
+    [winMessage show];
+}
+
+- (void)alertView:(UIAlertView *)alertView
+didDismissWithButtonIndex:(NSInteger)buttonIndex
+{
+    [self startRound];
 }
 
 - (void)gridCellSelectedAtRow:(NSNumber*)row atColumn:(NSNumber*)column
@@ -59,6 +87,10 @@ static float NUM_PAD_HEIGHT_FACTOR = 1.0 / 7;
                 toValue:selectedNumber];
             [_gridView setValueAtRow:rowIntVal atColumn:colIntVal
                 toValue:selectedNumber];
+            
+            if ([_gridModel isGridFull]) {
+                [self endRound];
+            }
         }
     }
 }
@@ -77,7 +109,8 @@ static float NUM_PAD_HEIGHT_FACTOR = 1.0 / 7;
     
     _gridView = [[KAMSGridView alloc] initWithFrame:gridFrame];
     
-    [_gridView setTarget:self action:@selector(gridCellSelectedAtRow:atColumn:)];
+    [_gridView setTarget:self
+        action:@selector(gridCellSelectedAtRow:atColumn:)];
     [self.view addSubview:_gridView];
 }
 
