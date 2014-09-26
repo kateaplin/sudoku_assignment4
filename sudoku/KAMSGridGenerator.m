@@ -17,6 +17,11 @@
     return [KAMSGridGenerator parseLine:randomLine];
 }
 
+/**
+ * Assumes that grid1.txt and grid2.txt are available as supporting files,
+ * and that these files each contain valid sudoku grids represented as
+ * a line of numbers and periods.
+ */
 + (NSString*) readFromRandomFile
 {
     int fileNum = (arc4random() % 2) + 1;
@@ -29,14 +34,20 @@
     return readString;
 }
 
+/**
+ * Assumes that sudokuLine is a valid sudoku grid represented as
+ * a line of numbers and periods.
+ */
 + (NSMutableArray*) parseLine:(NSString*)sudokuLine
 {
+    NSString *cleanLine =
+        [sudokuLine stringByReplacingOccurrencesOfString:@"." withString:@"0"];
     NSMutableArray *grid = [[NSMutableArray alloc] initWithCapacity:9];
     for (int row = 0; row < 9; row++) {
         NSMutableArray *rowArray = [[NSMutableArray alloc] initWithCapacity:9];
         for (int col = 0; col < 9; col++) {
             int index = row * 9 + col;
-            NSString *atIndex = [sudokuLine
+            NSString *atIndex = [cleanLine
                 substringWithRange:NSMakeRange(index, 1)];
             NSInteger integer = [atIndex integerValue];
             NSNumber *number = [NSNumber numberWithInteger:integer];
@@ -47,6 +58,10 @@
     return grid;
 }
 
+/**
+ * Assumes that allGrids is a string from a file where each line is a valid
+ * sudoku grid represented as a line of numbers and periods.
+ */
 + (NSString*) getRandomLine:(NSString*)allGrids
 {
     NSArray *allLines = [allGrids componentsSeparatedByCharactersInSet:
