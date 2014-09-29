@@ -11,7 +11,7 @@
 #import "KAMSNumPadView.h"
 #import "KAMSGridModel.h"
 #import "KAMSStopwatchView.h"
-
+#import "KAMSBestTimeView.h"
 
 static float GRID_FRAME_SIZE_FACTOR = 0.8;
 
@@ -22,8 +22,8 @@ static NSString *END_GAME_ALERT_MESSAGE =
     @"Press \"Play Again\" to start another round.";
 static NSString *END_GAME_ALERT_CANCEL_BUTTON_TITLE = @"Play Again?";
 
-static float STOPWATCH_FRAME_WIDTH = 100;
-static float STOPWATCH_FRAME_Y_POSITION = 25;
+static float TIME_FRAME_WIDTH = 100;
+static float TIME_FRAME_Y_POSITION = 25;
 
 @interface KAMSViewController () {
     KAMSGridView *_gridView;
@@ -32,6 +32,8 @@ static float STOPWATCH_FRAME_Y_POSITION = 25;
     KAMSStopwatchView *_stopwatchView;
     int _secondsElapsed;
     NSTimer *_timer;
+    int _bestSecondsElapsed;
+    KAMSBestTimeView *_bestTimeView;
 }
 
 @end
@@ -53,9 +55,11 @@ static float STOPWATCH_FRAME_Y_POSITION = 25;
 
 - (void) startGame
 {
+    _bestSecondsElapsed = INT_MAX;
     [self initializeGridView];
     [self initializeNumPadView];
     [self initializeStopwatchView];
+    [self initializeBestTimeView];
     [self startRound];
 }
 
@@ -143,11 +147,22 @@ didDismissWithButtonIndex:(NSInteger)buttonIndex
 {
     CGRect frame = self.view.frame;
     CGFloat overallFrameWidth = CGRectGetWidth(frame);
-    CGFloat x = (overallFrameWidth / 4) - (STOPWATCH_FRAME_WIDTH / 2);
-    CGRect stopwatchFrame = CGRectMake(x, STOPWATCH_FRAME_Y_POSITION,
-        STOPWATCH_FRAME_WIDTH, STOPWATCH_FRAME_WIDTH / 2);
+    CGFloat x = (overallFrameWidth / 4) - (TIME_FRAME_WIDTH / 2);
+    CGRect stopwatchFrame = CGRectMake(x, TIME_FRAME_Y_POSITION,
+        TIME_FRAME_WIDTH, TIME_FRAME_WIDTH / 2);
     _stopwatchView = [[KAMSStopwatchView alloc] initWithFrame:stopwatchFrame];
     [self.view addSubview:_stopwatchView];
+}
+
+- (void)initializeBestTimeView
+{
+    CGRect frame = self.view.frame;
+    CGFloat overallFrameWidth = CGRectGetWidth(frame);
+    CGFloat x = 3 * (overallFrameWidth / 4) - (TIME_FRAME_WIDTH / 2);
+    CGRect stopwatchFrame = CGRectMake(x, TIME_FRAME_Y_POSITION,
+        TIME_FRAME_WIDTH, TIME_FRAME_WIDTH / 2);
+    _bestTimeView = [[KAMSBestTimeView alloc] initWithFrame:stopwatchFrame];
+    [self.view addSubview:_bestTimeView];
 }
 
 - (void)startStopwatch
@@ -165,6 +180,11 @@ didDismissWithButtonIndex:(NSInteger)buttonIndex
 
 - (void)stopStopwatch
 {
+    if (_bestSecondsElapsed > _secondsElapsed) {
+        _bestSecondsElapsed = _secondsElapsed;
+        [_bestTimeView setSeconds:_bestSecondsElapsed];
+    }
+    
     [_timer invalidate];
     _timer = nil;
 }

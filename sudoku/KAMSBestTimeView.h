@@ -10,4 +10,6 @@
 
 @interface KAMSBestTimeView : UILabel
 
+- (void)setSeconds:(int)seconds;
+
 @end
