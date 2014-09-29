@@ -10,4 +10,6 @@
 
 @interface KAMSStopwatchView : UILabel
 
+- (void)setSeconds:(int)seconds;
+
 @end

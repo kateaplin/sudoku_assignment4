@@ -10,12 +10,25 @@
 
 @implementation KAMSStopwatchView
 
-/*
-// Only override drawRect: if you perform custom drawing.
-// An empty implementation adversely affects performance during animation.
-- (void)drawRect:(CGRect)rect {
-    // Drawing code
+
+- (id)initWithFrame:(CGRect)frame
+{
+    self = [super initWithFrame:frame];
+    if (self) {
+        [self setBackgroundColor:[UIColor clearColor]];
+        self.text = @"Time: -- : --";
+    }
+    return self;
+    
 }
-*/
+
+/**
+ * Displays the given number of seconds.
+ */
+- (void)setSeconds:(int)seconds
+{
+    self.text = [NSString stringWithFormat:@"Time: %02.f : %02i",
+        round(seconds / 60), seconds % 60];
+}
 
 @end
