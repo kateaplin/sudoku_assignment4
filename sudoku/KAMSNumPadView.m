@@ -90,13 +90,18 @@ static float NUMPAD_CORNER_RADIUS = 30.0;
         imageWithColor:[UIColor whiteColor]] forState:UIControlStateNormal];
     UIButton *newCell = [_numberCells objectAtIndex:newCellIndex - 1];
     [newCell setBackgroundImage:[KAMSSolidImageUtility
-        imageWithColor:[UIColor yellowColor]] forState:UIControlStateNormal];
+        imageWithColor:[KAMSNumPadView highlightColor]] forState:UIControlStateNormal];
     _currentValue = newCellIndex;
 }
 
 + (UIFont*)cellFontStyle
 {
     return [UIFont fontWithName:@"Helvetica-Bold" size:CELL_FONT_SIZE];
-    
+}
+
++ (UIColor*)highlightColor
+{
+    return [UIColor colorWithRed:228.0 / 255.0 green:183.0 / 255.0
+                            blue:240.0 / 255.0 alpha:1.0];
 }
 @end
