@@ -104,8 +104,11 @@ static float GRID_CORNER_RADIUS = 30.0;
 - (void)setValueAtRow:(int)row atColumn:(int)column toValue:(int)value
 {
     UIButton *selected = [[_cells objectAtIndex:row] objectAtIndex:column];
-    [selected setTitle:[NSString stringWithFormat:@"%d", value]
-        forState:UIControlStateNormal];
+    NSString *title = @"";
+    if (value != 0) {
+        title = [NSString stringWithFormat:@"%d", value];
+    }
+    [selected setTitle:title forState:UIControlStateNormal];
 }
 
 /**

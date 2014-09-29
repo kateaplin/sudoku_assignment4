@@ -86,8 +86,9 @@
         forValue:value];
     BOOL blockConsistent = [self isBlockConsistentAtRow:row atColumn:column
         forValue:value];
+    BOOL isZero = value == 0;
     
-    return rowConsistent && colConsistent && blockConsistent;
+    return (rowConsistent && colConsistent && blockConsistent) || isZero;
 }
 
 /**

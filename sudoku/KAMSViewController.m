@@ -255,7 +255,6 @@ didDismissWithButtonIndex:(NSInteger)buttonIndex
 - (void)click
 {
     [_clickAudioPlayer play];
-    NSLog(@"click sound!");
 }
 
 + (UIColor*)backgroundColor
