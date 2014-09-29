@@ -24,7 +24,7 @@ static NSString *END_GAME_ALERT_MESSAGE =
     @"Press \"Play Again\" to start another round.";
 static NSString *END_GAME_ALERT_CANCEL_BUTTON_TITLE = @"Play Again?";
 
-static float TIME_FRAME_WIDTH = 100;
+static float TIME_FRAME_WIDTH = 200;
 static float TIME_FRAME_Y_POSITION = 25;
 
 @interface KAMSViewController () {
@@ -48,7 +48,6 @@ static float TIME_FRAME_Y_POSITION = 25;
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-    
     [self startGame];
 }
 
@@ -60,6 +59,7 @@ static float TIME_FRAME_Y_POSITION = 25;
 
 - (void) startGame
 {
+    self.view.backgroundColor = [KAMSViewController backgroundColor];
     _bestSecondsElapsed = INT_MAX;
     [self initializeGridView];
     [self initializeNumPadView];
@@ -257,5 +257,12 @@ didDismissWithButtonIndex:(NSInteger)buttonIndex
     [_clickAudioPlayer play];
     NSLog(@"click sound!");
 }
+
++ (UIColor*)backgroundColor
+{
+    return [UIColor colorWithRed:1.0 green:211.0 / 255.0 blue:224.0 / 255.0
+        alpha:1.0];
+}
+
 
 @end

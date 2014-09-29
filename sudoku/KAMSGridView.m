@@ -16,6 +16,9 @@ static float SMALL_GRID_BORDER_RATIO = 0.25;
 static int NUM_LARGE_GRID_BORDERS = 4;
 static int NUM_SMALL_GRID_BORDERS = 6;
 
+static int CELL_FONT_SIZE = 35;
+static float GRID_CORNER_RADIUS = 30.0;
+
 @interface KAMSGridView() {
     NSMutableArray *_cells;
     id _target;
@@ -64,6 +67,7 @@ static int NUM_SMALL_GRID_BORDERS = 6;
                     forState:UIControlStateNormal];
                 [gridButton setTitleColor:[KAMSGridView cellTextColor]
                     forState:UIControlStateNormal];
+                [gridButton.titleLabel setFont:[KAMSGridView cellFontStyle]];
                 
                 // Each button's tag is [col][row]. So 87 means column 8 row 7.
                 gridButton.tag = col * 10 + row;
@@ -75,6 +79,7 @@ static int NUM_SMALL_GRID_BORDERS = 6;
             }
             [_cells addObject:currentRow];
         }
+        [self.layer setCornerRadius:GRID_CORNER_RADIUS];
     }
     return self;
 }
@@ -167,11 +172,18 @@ static int NUM_SMALL_GRID_BORDERS = 6;
 
 + (UIColor*)initialCellTextColor
 {
-    return [UIColor blueColor];
+    return [UIColor blackColor];
 }
 
 + (UIColor*)cellTextColor
 {
-    return [UIColor blackColor];
+    return [UIColor darkGrayColor];
 }
+
++ (UIFont*)cellFontStyle
+{
+    return [UIFont fontWithName:@"Helvetica-Bold" size:CELL_FONT_SIZE];
+
+}
+
 @end

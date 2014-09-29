@@ -7,6 +7,7 @@
 //
 
 #import "KAMSBestTimeView.h"
+static int LABEL_FONT_SIZE = 30;
 
 @implementation KAMSBestTimeView
 
@@ -15,6 +16,7 @@
     self = [super initWithFrame:frame];
     if (self) {
         [self setBackgroundColor:[UIColor clearColor]];
+        self.font = [KAMSBestTimeView cellFontStyle];
         self.text = @"Best: -- : --";
     }
     return self;
@@ -27,6 +29,12 @@
 {
     self.text = [NSString stringWithFormat:@"Best: %02.f : %02i",
                  round(seconds / 60), seconds % 60];
+}
+
++ (UIFont*)cellFontStyle
+{
+    return [UIFont fontWithName:@"Helvetica-Bold" size:LABEL_FONT_SIZE];
+    
 }
 
 @end

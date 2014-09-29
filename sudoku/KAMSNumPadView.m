@@ -17,6 +17,8 @@
 }
 
 static float BORDER_RATIO = 0.5;
+static int CELL_FONT_SIZE = 35;
+static float NUMPAD_CORNER_RADIUS = 30.0;
 
 - (id)initWithFrame:(CGRect)frame
 {
@@ -47,6 +49,7 @@ static float BORDER_RATIO = 0.5;
                 forState:UIControlStateNormal];
             [numberCell setTitleColor:[UIColor blackColor]
                 forState:UIControlStateNormal];
+            [numberCell.titleLabel setFont:[KAMSNumPadView cellFontStyle]];
             numberCell.tag = i;
             
             [_numberCells addObject:numberCell];
@@ -56,6 +59,8 @@ static float BORDER_RATIO = 0.5;
         // Initially, the number 1 is highlighted for the user.
         _currentValue = 1;
         [self setCellActive:1];
+        
+        [self.layer setCornerRadius:NUMPAD_CORNER_RADIUS];
     }
     return self;
 }
@@ -85,7 +90,18 @@ static float BORDER_RATIO = 0.5;
         imageWithColor:[UIColor whiteColor]] forState:UIControlStateNormal];
     UIButton *newCell = [_numberCells objectAtIndex:newCellIndex - 1];
     [newCell setBackgroundImage:[KAMSSolidImageUtility
-        imageWithColor:[UIColor yellowColor]] forState:UIControlStateNormal];
+        imageWithColor:[KAMSNumPadView highlightColor]] forState:UIControlStateNormal];
     _currentValue = newCellIndex;
+}
+
++ (UIFont*)cellFontStyle
+{
+    return [UIFont fontWithName:@"Helvetica-Bold" size:CELL_FONT_SIZE];
+}
+
++ (UIColor*)highlightColor
+{
+    return [UIColor colorWithRed:228.0 / 255.0 green:183.0 / 255.0
+                            blue:240.0 / 255.0 alpha:1.0];
 }
 @end
