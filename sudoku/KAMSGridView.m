@@ -17,6 +17,7 @@ static int NUM_LARGE_GRID_BORDERS = 4;
 static int NUM_SMALL_GRID_BORDERS = 6;
 
 static int CELL_FONT_SIZE = 35;
+static float GRID_CORNER_RADIUS = 30.0;
 
 @interface KAMSGridView() {
     NSMutableArray *_cells;
@@ -78,6 +79,7 @@ static int CELL_FONT_SIZE = 35;
             }
             [_cells addObject:currentRow];
         }
+        [self.layer setCornerRadius:GRID_CORNER_RADIUS];
     }
     return self;
 }

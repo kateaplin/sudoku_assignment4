@@ -18,6 +18,7 @@
 
 static float BORDER_RATIO = 0.5;
 static int CELL_FONT_SIZE = 35;
+static float NUMPAD_CORNER_RADIUS = 30.0;
 
 - (id)initWithFrame:(CGRect)frame
 {
@@ -58,6 +59,8 @@ static int CELL_FONT_SIZE = 35;
         // Initially, the number 1 is highlighted for the user.
         _currentValue = 1;
         [self setCellActive:1];
+        
+        [self.layer setCornerRadius:NUMPAD_CORNER_RADIUS];
     }
     return self;
 }
