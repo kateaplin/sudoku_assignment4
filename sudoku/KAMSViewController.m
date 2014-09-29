@@ -36,7 +36,9 @@ static float TIME_FRAME_Y_POSITION = 25;
     NSTimer *_timer;
     int _bestSecondsElapsed;
     KAMSBestTimeView *_bestTimeView;
-    AVAudioPlayer *_player;
+    AVAudioPlayer *_clickAudioPlayer;
+    AVAudioPlayer *_winGameAudioPlayer;
+    AVAudioPlayer *_bgMusicPlayer;
 }
 
 @end
@@ -63,7 +65,8 @@ static float TIME_FRAME_Y_POSITION = 25;
     [self initializeNumPadView];
     [self initializeStopwatchView];
     [self initializeBestTimeView];
-    [self initializeAudioPlayer];
+    [self initializeAudioPlayers];
+    [_bgMusicPlayer play];
     [self startRound];
 }
 
@@ -83,6 +86,7 @@ static float TIME_FRAME_Y_POSITION = 25;
         delegate:self cancelButtonTitle:END_GAME_ALERT_CANCEL_BUTTON_TITLE
         otherButtonTitles: nil];
     [winMessage show];
+    [_winGameAudioPlayer play];
 }
 
 - (void)alertView:(UIAlertView *)alertView
@@ -214,21 +218,43 @@ didDismissWithButtonIndex:(NSInteger)buttonIndex
     [_gridModel generateGrid];
 }
 
-- (void)initializeAudioPlayer
+- (void)initializeAudioPlayers
 {
     // Audio source:
     // http://opengameart.org/content/click-sounds6
     // This audio is liscenced into the public domain (CC0).
-    NSString *path = [[NSBundle mainBundle]
+    NSString *clickPath = [[NSBundle mainBundle]
         pathForResource:@"click_sound_1" ofType:@"mp3"];
-    NSURL *URL = [NSURL fileURLWithPath:path];
-    _player = [[AVAudioPlayer alloc] initWithContentsOfURL:URL error:nil];
-    _player.numberOfLoops = 1;
+    NSURL *clickURL = [NSURL fileURLWithPath:clickPath];
+    _clickAudioPlayer = [[AVAudioPlayer alloc] initWithContentsOfURL:clickURL
+        error:nil];
+    _clickAudioPlayer.numberOfLoops = 1;
+    
+    // Audio source:
+    // http://opengameart.org/content/completion-sound
+    // This audio is liscenced by CC 3.0.
+    NSString *winPath = [[NSBundle mainBundle]
+        pathForResource:@"gmae" ofType:@"wav"];
+    NSURL *winURL = [NSURL fileURLWithPath:winPath];
+    _winGameAudioPlayer = [[AVAudioPlayer alloc] initWithContentsOfURL:winURL
+        error:nil];
+    _winGameAudioPlayer.numberOfLoops = 1;
+    
+    // Audio source:
+    // http://opengameart.org/content/sunday-at-the-disco-scc-version
+    // This audio is liscence by CC 3.0.
+    NSString *bgPath = [[NSBundle mainBundle]
+        pathForResource:@"Sunday at the disco SCC" ofType:@"wav"];
+    NSURL *bgURL = [NSURL fileURLWithPath:bgPath];
+    _bgMusicPlayer = [[AVAudioPlayer alloc] initWithContentsOfURL:bgURL
+        error:nil];
+    // Infinitely loop background music.
+    _bgMusicPlayer.numberOfLoops = -1;
 }
 
 - (void)click
 {
-    [_player play];
+    [_clickAudioPlayer play];
     NSLog(@"click sound!");
 }
 
