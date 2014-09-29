@@ -12,6 +12,8 @@
 #import "KAMSGridModel.h"
 #import "KAMSStopwatchView.h"
 #import "KAMSBestTimeView.h"
+#import <AVFoundation/AVFoundation.h>
+#include <AudioToolbox/AudioToolbox.h>
 
 static float GRID_FRAME_SIZE_FACTOR = 0.8;
 
@@ -34,6 +36,7 @@ static float TIME_FRAME_Y_POSITION = 25;
     NSTimer *_timer;
     int _bestSecondsElapsed;
     KAMSBestTimeView *_bestTimeView;
+    AVAudioPlayer *_player;
 }
 
 @end
@@ -60,6 +63,7 @@ static float TIME_FRAME_Y_POSITION = 25;
     [self initializeNumPadView];
     [self initializeStopwatchView];
     [self initializeBestTimeView];
+    [self initializeAudioPlayer];
     [self startRound];
 }
 
@@ -89,6 +93,7 @@ didDismissWithButtonIndex:(NSInteger)buttonIndex
 
 - (void)gridCellSelectedAtRow:(NSNumber*)row atColumn:(NSNumber*)column
 {
+    [self click];
     int rowIntVal = [row intValue];
     int colIntVal = [column intValue];
     
@@ -140,6 +145,7 @@ didDismissWithButtonIndex:(NSInteger)buttonIndex
         size, size * NUM_PAD_HEIGHT_FACTOR);
     
     _numPadView = [[KAMSNumPadView alloc] initWithFrame:gridFrame];
+    [_numPadView setTarget:self action:@selector(click)];
     [self.view addSubview:_numPadView];
 }
 
@@ -206,6 +212,24 @@ didDismissWithButtonIndex:(NSInteger)buttonIndex
 {
     _gridModel = [[KAMSGridModel alloc] init];
     [_gridModel generateGrid];
+}
+
+- (void)initializeAudioPlayer
+{
+    // Audio source:
+    // http://opengameart.org/content/click-sounds6
+    // This audio is liscenced into the public domain (CC0).
+    NSString *path = [[NSBundle mainBundle]
+        pathForResource:@"click_sound_1" ofType:@"mp3"];
+    NSURL *URL = [NSURL fileURLWithPath:path];
+    _player = [[AVAudioPlayer alloc] initWithContentsOfURL:URL error:nil];
+    _player.numberOfLoops = 1;
+}
+
+- (void)click
+{
+    [_player play];
+    NSLog(@"click sound!");
 }
 
 @end
