@@ -148,4 +148,30 @@ static int INITIAL_GRID[9][9] = {
         [_testGridModel isBlockConsistentAtRow:1 atColumn:0 forValue:2] == NO,
         @"Check consistency for known inconsistent value for block.");
 }
+
+-(void)testIsGridFull
+{
+    static int ALMOST_FULL_GRID[9][9] = {
+        {7, 6, 5, 4, 2, 3, 8, 1, 9},
+        {1, 3, 9, 5, 7, 8, 2 ,6, 4},
+        {4, 2, 8, 6, 9, 1, 5, 7, 3},
+        {6, 5, 7, 2, 8, 9, 4, 3, 1},
+        {2, 8, 4, 1, 3, 6, 9, 5, 7},
+        {9, 1, 3, 7, 4, 5, 6, 2, 8},
+        {5, 7, 1, 8, 6, 4, 3, 9, 2},
+        {3, 4, 2, 9, 5, 7, 1, 8, 6},
+        {8, 9, 6, 3, 1, 2, 7, 4, 0}
+    };
+    
+    [_testGridModel useGrid:ALMOST_FULL_GRID];
+    
+    XCTAssertTrue([_testGridModel isGridFull] == NO,
+        @"Check that non full grid is not full.");
+    
+    [_testGridModel setValueAtRow:8 atColumn:8 toValue:5];
+    
+    XCTAssertTrue([_testGridModel isGridFull] == YES,
+        @"Check that full grid is full.");
+}
+
 @end
