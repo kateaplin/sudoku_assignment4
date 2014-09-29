@@ -11,5 +11,6 @@
 @interface KAMSNumPadView : UIView
 
 -(int) getCurrentValue;
+-(void) setTarget:(id)target action:(SEL)action;
 
 @end

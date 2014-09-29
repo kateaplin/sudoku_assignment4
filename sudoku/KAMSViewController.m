@@ -12,6 +12,8 @@
 #import "KAMSGridModel.h"
 #import "KAMSStopwatchView.h"
 #import "KAMSBestTimeView.h"
+#import <AVFoundation/AVFoundation.h>
+#include <AudioToolbox/AudioToolbox.h>
 
 static float GRID_FRAME_SIZE_FACTOR = 0.8;
 
@@ -34,6 +36,9 @@ static float TIME_FRAME_Y_POSITION = 25;
     NSTimer *_timer;
     int _bestSecondsElapsed;
     KAMSBestTimeView *_bestTimeView;
+    AVAudioPlayer *_clickAudioPlayer;
+    AVAudioPlayer *_winGameAudioPlayer;
+    AVAudioPlayer *_bgMusicPlayer;
 }
 
 @end
@@ -60,6 +65,8 @@ static float TIME_FRAME_Y_POSITION = 25;
     [self initializeNumPadView];
     [self initializeStopwatchView];
     [self initializeBestTimeView];
+    [self initializeAudioPlayers];
+    [_bgMusicPlayer play];
     [self startRound];
 }
 
@@ -79,6 +86,7 @@ static float TIME_FRAME_Y_POSITION = 25;
         delegate:self cancelButtonTitle:END_GAME_ALERT_CANCEL_BUTTON_TITLE
         otherButtonTitles: nil];
     [winMessage show];
+    [_winGameAudioPlayer play];
 }
 
 - (void)alertView:(UIAlertView *)alertView
@@ -89,6 +97,7 @@ didDismissWithButtonIndex:(NSInteger)buttonIndex
 
 - (void)gridCellSelectedAtRow:(NSNumber*)row atColumn:(NSNumber*)column
 {
+    [self click];
     int rowIntVal = [row intValue];
     int colIntVal = [column intValue];
     
@@ -140,6 +149,7 @@ didDismissWithButtonIndex:(NSInteger)buttonIndex
         size, size * NUM_PAD_HEIGHT_FACTOR);
     
     _numPadView = [[KAMSNumPadView alloc] initWithFrame:gridFrame];
+    [_numPadView setTarget:self action:@selector(click)];
     [self.view addSubview:_numPadView];
 }
 
@@ -206,6 +216,46 @@ didDismissWithButtonIndex:(NSInteger)buttonIndex
 {
     _gridModel = [[KAMSGridModel alloc] init];
     [_gridModel generateGrid];
+}
+
+- (void)initializeAudioPlayers
+{
+    // Audio source:
+    // http://opengameart.org/content/click-sounds6
+    // This audio is liscenced into the public domain (CC0).
+    NSString *clickPath = [[NSBundle mainBundle]
+        pathForResource:@"click_sound_1" ofType:@"mp3"];
+    NSURL *clickURL = [NSURL fileURLWithPath:clickPath];
+    _clickAudioPlayer = [[AVAudioPlayer alloc] initWithContentsOfURL:clickURL
+        error:nil];
+    _clickAudioPlayer.numberOfLoops = 1;
+    
+    // Audio source:
+    // http://opengameart.org/content/completion-sound
+    // This audio is liscenced by CC 3.0.
+    NSString *winPath = [[NSBundle mainBundle]
+        pathForResource:@"gmae" ofType:@"wav"];
+    NSURL *winURL = [NSURL fileURLWithPath:winPath];
+    _winGameAudioPlayer = [[AVAudioPlayer alloc] initWithContentsOfURL:winURL
+        error:nil];
+    _winGameAudioPlayer.numberOfLoops = 1;
+    
+    // Audio source:
+    // http://opengameart.org/content/sunday-at-the-disco-scc-version
+    // This audio is liscence by CC 3.0.
+    NSString *bgPath = [[NSBundle mainBundle]
+        pathForResource:@"Sunday at the disco SCC" ofType:@"wav"];
+    NSURL *bgURL = [NSURL fileURLWithPath:bgPath];
+    _bgMusicPlayer = [[AVAudioPlayer alloc] initWithContentsOfURL:bgURL
+        error:nil];
+    // Infinitely loop background music.
+    _bgMusicPlayer.numberOfLoops = -1;
+}
+
+- (void)click
+{
+    [_clickAudioPlayer play];
+    NSLog(@"click sound!");
 }
 
 @end

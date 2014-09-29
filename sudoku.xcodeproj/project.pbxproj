@@ -14,6 +14,9 @@
 		2905408B19CE84510051540A /* KAMSNumPadView.m in Sources */ = {isa = PBXBuildFile; fileRef = 2905408A19CE84510051540A /* KAMSNumPadView.m */; };
 		2941968F19D90C9E00C523CE /* KAMSStopwatchView.m in Sources */ = {isa = PBXBuildFile; fileRef = 2941968E19D90C9E00C523CE /* KAMSStopwatchView.m */; };
 		2941969219D9147700C523CE /* KAMSBestTimeView.m in Sources */ = {isa = PBXBuildFile; fileRef = 2941969119D9147700C523CE /* KAMSBestTimeView.m */; };
+		2941969419D91C4B00C523CE /* click_sound_1.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 2941969319D91C4B00C523CE /* click_sound_1.mp3 */; };
+		2941969619D9209E00C523CE /* gmae.wav in Resources */ = {isa = PBXBuildFile; fileRef = 2941969519D9209E00C523CE /* gmae.wav */; };
+		2941969819D9231100C523CE /* Sunday at the disco SCC.wav in Resources */ = {isa = PBXBuildFile; fileRef = 2941969719D9231100C523CE /* Sunday at the disco SCC.wav */; };
 		29B388B919CFD0BB00968289 /* KAMSSolidImageUtility.m in Sources */ = {isa = PBXBuildFile; fileRef = 29B388B819CFD0BB00968289 /* KAMSSolidImageUtility.m */; };
 		29D9317119D4CF5100FA17D6 /* KAMSGridGenerator.m in Sources */ = {isa = PBXBuildFile; fileRef = 29D9317019D4CF5100FA17D6 /* KAMSGridGenerator.m */; };
 		29D9317219D4CF6300FA17D6 /* KAMSGridGenerator.m in Sources */ = {isa = PBXBuildFile; fileRef = 29D9317019D4CF5100FA17D6 /* KAMSGridGenerator.m */; };
@@ -55,6 +58,9 @@
 		2941968E19D90C9E00C523CE /* KAMSStopwatchView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = KAMSStopwatchView.m; path = ../KAMSStopwatchView.m; sourceTree = "<group>"; };
 		2941969019D9147700C523CE /* KAMSBestTimeView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = KAMSBestTimeView.h; sourceTree = "<group>"; };
 		2941969119D9147700C523CE /* KAMSBestTimeView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = KAMSBestTimeView.m; sourceTree = "<group>"; };
+		2941969319D91C4B00C523CE /* click_sound_1.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = click_sound_1.mp3; sourceTree = "<group>"; };
+		2941969519D9209E00C523CE /* gmae.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = gmae.wav; sourceTree = "<group>"; };
+		2941969719D9231100C523CE /* Sunday at the disco SCC.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = "Sunday at the disco SCC.wav"; sourceTree = "<group>"; };
 		29B388B719CFD0BB00968289 /* KAMSSolidImageUtility.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = KAMSSolidImageUtility.h; sourceTree = "<group>"; };
 		29B388B819CFD0BB00968289 /* KAMSSolidImageUtility.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = KAMSSolidImageUtility.m; sourceTree = "<group>"; };
 		29D9316F19D4CF5100FA17D6 /* KAMSGridGenerator.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = KAMSGridGenerator.h; sourceTree = "<group>"; };
@@ -167,6 +173,9 @@
 		AFB4C54519C25C7600AE4A44 /* Supporting Files */ = {
 			isa = PBXGroup;
 			children = (
+				2941969719D9231100C523CE /* Sunday at the disco SCC.wav */,
+				2941969519D9209E00C523CE /* gmae.wav */,
+				2941969319D91C4B00C523CE /* click_sound_1.mp3 */,
 				0F2E331119D5E3C6006BBD22 /* grid2.txt */,
 				0F2E331219D5E3C6006BBD22 /* grid1.txt */,
 				AFB4C54619C25C7600AE4A44 /* sudoku-Info.plist */,
@@ -273,7 +282,10 @@
 			buildActionMask = 2147483647;
 			files = (
 				AFB4C55719C25C7600AE4A44 /* Images.xcassets in Resources */,
+				2941969419D91C4B00C523CE /* click_sound_1.mp3 in Resources */,
+				2941969619D9209E00C523CE /* gmae.wav in Resources */,
 				0F2E331419D5E3C6006BBD22 /* grid1.txt in Resources */,
+				2941969819D9231100C523CE /* Sunday at the disco SCC.wav in Resources */,
 				AFB4C54919C25C7600AE4A44 /* InfoPlist.strings in Resources */,
 				AFB4C55219C25C7600AE4A44 /* Main.storyboard in Resources */,
 				0F2E331319D5E3C6006BBD22 /* grid2.txt in Resources */,

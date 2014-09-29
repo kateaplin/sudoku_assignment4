@@ -12,6 +12,8 @@
 @implementation KAMSNumPadView {
     int _currentValue;
     NSMutableArray *_numberCells;
+    id _target;
+    SEL _action;
 }
 
 static float BORDER_RATIO = 0.5;
@@ -63,10 +65,17 @@ static float BORDER_RATIO = 0.5;
     return _currentValue;
 }
 
+- (void)setTarget:(id)target action:(SEL)action
+{
+    _target = target;
+    _action = action;
+}
+
 - (void)cellSelected:(id)sender
 {
     int selectedNumber = (int)[sender tag];
     [self setCellActive:selectedNumber];
+    [_target performSelector:_action];
 }
 
 -(void)setCellActive:(int)newCellIndex
