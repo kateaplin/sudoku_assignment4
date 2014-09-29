@@ -10,7 +10,8 @@
 #import "KAMSGridView.h"
 #import "KAMSNumPadView.h"
 #import "KAMSGridModel.h"
-
+#import "KAMSStopwatchView.h"
+#import "KAMSBestTimeView.h"
 
 static float GRID_FRAME_SIZE_FACTOR = 0.8;
 
@@ -21,10 +22,18 @@ static NSString *END_GAME_ALERT_MESSAGE =
     @"Press \"Play Again\" to start another round.";
 static NSString *END_GAME_ALERT_CANCEL_BUTTON_TITLE = @"Play Again?";
 
+static float TIME_FRAME_WIDTH = 100;
+static float TIME_FRAME_Y_POSITION = 25;
+
 @interface KAMSViewController () {
     KAMSGridView *_gridView;
     KAMSNumPadView *_numPadView;
     KAMSGridModel *_gridModel;
+    KAMSStopwatchView *_stopwatchView;
+    int _secondsElapsed;
+    NSTimer *_timer;
+    int _bestSecondsElapsed;
+    KAMSBestTimeView *_bestTimeView;
 }
 
 @end
@@ -34,7 +43,6 @@ static NSString *END_GAME_ALERT_CANCEL_BUTTON_TITLE = @"Play Again?";
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-	// Do any additional setup after loading the view, typically from a nib.
     
     [self startGame];
 }
@@ -47,8 +55,11 @@ static NSString *END_GAME_ALERT_CANCEL_BUTTON_TITLE = @"Play Again?";
 
 - (void) startGame
 {
+    _bestSecondsElapsed = INT_MAX;
     [self initializeGridView];
     [self initializeNumPadView];
+    [self initializeStopwatchView];
+    [self initializeBestTimeView];
     [self startRound];
 }
 
@@ -57,10 +68,12 @@ static NSString *END_GAME_ALERT_CANCEL_BUTTON_TITLE = @"Play Again?";
     [_gridView clearCells];
     [self initializeGridModel];
     [self setInitialGridValues];
+    [self startStopwatch];
 }
 
 -(void) endRound
 {
+    [self stopStopwatch];
     UIAlertView *winMessage = [[UIAlertView alloc]
         initWithTitle:END_GAME_ALERT_TITLE message:END_GAME_ALERT_MESSAGE
         delegate:self cancelButtonTitle:END_GAME_ALERT_CANCEL_BUTTON_TITLE
@@ -130,6 +143,52 @@ didDismissWithButtonIndex:(NSInteger)buttonIndex
     [self.view addSubview:_numPadView];
 }
 
+- (void)initializeStopwatchView
+{
+    CGRect frame = self.view.frame;
+    CGFloat overallFrameWidth = CGRectGetWidth(frame);
+    CGFloat x = (overallFrameWidth / 4) - (TIME_FRAME_WIDTH / 2);
+    CGRect stopwatchFrame = CGRectMake(x, TIME_FRAME_Y_POSITION,
+        TIME_FRAME_WIDTH, TIME_FRAME_WIDTH / 2);
+    _stopwatchView = [[KAMSStopwatchView alloc] initWithFrame:stopwatchFrame];
+    [self.view addSubview:_stopwatchView];
+}
+
+- (void)initializeBestTimeView
+{
+    CGRect frame = self.view.frame;
+    CGFloat overallFrameWidth = CGRectGetWidth(frame);
+    CGFloat x = 3 * (overallFrameWidth / 4) - (TIME_FRAME_WIDTH / 2);
+    CGRect stopwatchFrame = CGRectMake(x, TIME_FRAME_Y_POSITION,
+        TIME_FRAME_WIDTH, TIME_FRAME_WIDTH / 2);
+    _bestTimeView = [[KAMSBestTimeView alloc] initWithFrame:stopwatchFrame];
+    [self.view addSubview:_bestTimeView];
+}
+
+- (void)startStopwatch
+{
+    _secondsElapsed = 0;
+    _timer = [NSTimer scheduledTimerWithTimeInterval:1.0 target:self
+        selector:@selector(tick:) userInfo:nil repeats:YES];
+}
+
+- (void)tick:(NSTimer*)timer
+{
+    _secondsElapsed++;
+    [_stopwatchView setSeconds:_secondsElapsed];
+}
+
+- (void)stopStopwatch
+{
+    if (_bestSecondsElapsed > _secondsElapsed) {
+        _bestSecondsElapsed = _secondsElapsed;
+        [_bestTimeView setSeconds:_bestSecondsElapsed];
+    }
+    
+    [_timer invalidate];
+    _timer = nil;
+}
+
 - (void)setInitialGridValues
 {
     for (int col = 0; col < 9; ++col) {
@@ -148,4 +207,5 @@ didDismissWithButtonIndex:(NSInteger)buttonIndex
     _gridModel = [[KAMSGridModel alloc] init];
     [_gridModel generateGrid];
 }
+
 @end
