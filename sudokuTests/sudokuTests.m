@@ -149,6 +149,9 @@ static int INITIAL_GRID[9][9] = {
         @"Check consistency for known inconsistent value for block.");
 }
 
+/**
+ * Tests isGridFull for a known non full grid and a known full grid.
+ */
 -(void)testIsGridFull
 {
     static int ALMOST_FULL_GRID[9][9] = {
@@ -172,6 +175,19 @@ static int INITIAL_GRID[9][9] = {
     
     XCTAssertTrue([_testGridModel isGridFull] == YES,
         @"Check that full grid is full.");
+}
+
+/**
+ * Tests resetGrid for a known value to ensure that a user input is erased.
+ */
+-(void)testReset
+{
+    [_testGridModel useGrid:INITIAL_GRID];
+    [_testGridModel setValueAtRow:8 atColumn:8 toValue:5];
+    [_testGridModel resetGrid];
+    
+    XCTAssertTrue([_testGridModel getValueAtRow:8 atColumn:8] == 0,
+        @"Check that a user set value is cleared after reset.");
 }
 
 @end
