@@ -12,6 +12,7 @@
 #import "KAMSGridModel.h"
 #import "KAMSStopwatchView.h"
 #import "KAMSBestTimeView.h"
+#import "KAMSResetView.h"
 #import <AVFoundation/AVFoundation.h>
 #include <AudioToolbox/AudioToolbox.h>
 
@@ -27,11 +28,15 @@ static NSString *END_GAME_ALERT_CANCEL_BUTTON_TITLE = @"Play Again?";
 static float TIME_FRAME_WIDTH = 200;
 static float TIME_FRAME_Y_POSITION = 25;
 
+static float RESET_FRAME_Y_FACTOR = 0.87;
+
+
 @interface KAMSViewController () {
     KAMSGridView *_gridView;
     KAMSNumPadView *_numPadView;
     KAMSGridModel *_gridModel;
     KAMSStopwatchView *_stopwatchView;
+    KAMSResetView *_resetView;
     int _secondsElapsed;
     NSTimer *_timer;
     int _bestSecondsElapsed;
@@ -64,6 +69,7 @@ static float TIME_FRAME_Y_POSITION = 25;
     [self initializeGridView];
     [self initializeNumPadView];
     [self initializeStopwatchView];
+    [self initializeResetView];
     [self initializeBestTimeView];
     [self initializeAudioPlayers];
     [_bgMusicPlayer play];
@@ -151,6 +157,22 @@ didDismissWithButtonIndex:(NSInteger)buttonIndex
     _numPadView = [[KAMSNumPadView alloc] initWithFrame:gridFrame];
     [_numPadView setTarget:self action:@selector(click)];
     [self.view addSubview:_numPadView];
+}
+
+- (void)initializeResetView
+{
+    CGRect frame = self.view.frame;
+    CGFloat overallFrameWidth = CGRectGetWidth(frame);
+    CGFloat overallFrameHeight = CGRectGetHeight(frame);
+    CGFloat x = (overallFrameWidth / 2) - (TIME_FRAME_WIDTH / 2);
+    CGFloat y = overallFrameHeight * RESET_FRAME_Y_FACTOR;
+    CGRect resetFrame = CGRectMake(x, y,
+                                       TIME_FRAME_WIDTH, TIME_FRAME_WIDTH / 2);
+    _resetView = [[KAMSResetView alloc] initWithFrame:resetFrame];
+    [self.view addSubview:_resetView];
+    
+    [_resetView addTarget:self action:@selector(resetClicked)
+         forControlEvents:UIControlEventTouchUpInside];
 }
 
 - (void)initializeStopwatchView
@@ -255,6 +277,13 @@ didDismissWithButtonIndex:(NSInteger)buttonIndex
 - (void)click
 {
     [_clickAudioPlayer play];
+}
+
+- (void)resetClicked
+{
+    [_gridModel resetGrid];
+    [_gridView clearCells];
+    [self setInitialGridValues];
 }
 
 + (UIColor*)backgroundColor
