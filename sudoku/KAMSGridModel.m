@@ -37,6 +37,13 @@
 }
 
 /**
+ * Resets the grid to remove all user input. 
+ */
+-(void) resetGrid
+{
+    [self useGrid:_initialGrid];
+}
+/**
  * Forces the Grid Model to use a given grid.
  */
 -(void) useGrid:(int[9][9])grid

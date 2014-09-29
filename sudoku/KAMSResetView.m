@@ -7,15 +7,28 @@
 //
 
 #import "KAMSResetView.h"
+#import "KAMSSolidImageUtility.h"
 
 @implementation KAMSResetView
 
-/*
-// Only override drawRect: if you perform custom drawing.
-// An empty implementation adversely affects performance during animation.
-- (void)drawRect:(CGRect)rect {
-    // Drawing code
-}
-*/
+static int LABEL_FONT_SIZE = 30;
 
+- (id)initWithFrame:(CGRect)frame
+{
+    self = [super initWithFrame:frame];
+    if (self) {
+        [self setBackgroundImage:[KAMSSolidImageUtility
+            imageWithColor:[UIColor whiteColor]] forState:UIControlStateNormal];
+        self.titleLabel.font = [KAMSResetView cellFontStyle];
+        [self setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
+        [self setTitle:@"Reset" forState:UIControlStateNormal];
+    }
+    return self;
+    
+}
+
++ (UIFont*)cellFontStyle
+{
+    return [UIFont fontWithName:@"Helvetica-Bold" size:LABEL_FONT_SIZE];
+}
 @end

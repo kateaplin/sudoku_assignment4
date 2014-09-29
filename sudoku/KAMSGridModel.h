@@ -11,6 +11,7 @@
 @interface KAMSGridModel : NSObject
 
 -(void) generateGrid;
+-(void) resetGrid;
 -(void) useGrid:(int[9][9]) grid;
 -(int) getValueAtRow:(int)row atColumn:(int)column;
 -(void) setValueAtRow:(int)row atColumn:(int)column toValue:(int)value;
