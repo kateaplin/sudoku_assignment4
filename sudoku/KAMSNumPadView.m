@@ -17,6 +17,7 @@
 }
 
 static float BORDER_RATIO = 0.5;
+static int CELL_FONT_SIZE = 35;
 
 - (id)initWithFrame:(CGRect)frame
 {
@@ -47,6 +48,7 @@ static float BORDER_RATIO = 0.5;
                 forState:UIControlStateNormal];
             [numberCell setTitleColor:[UIColor blackColor]
                 forState:UIControlStateNormal];
+            [numberCell.titleLabel setFont:[KAMSNumPadView cellFontStyle]];
             numberCell.tag = i;
             
             [_numberCells addObject:numberCell];
@@ -87,5 +89,11 @@ static float BORDER_RATIO = 0.5;
     [newCell setBackgroundImage:[KAMSSolidImageUtility
         imageWithColor:[UIColor yellowColor]] forState:UIControlStateNormal];
     _currentValue = newCellIndex;
+}
+
++ (UIFont*)cellFontStyle
+{
+    return [UIFont fontWithName:@"Helvetica-Bold" size:CELL_FONT_SIZE];
+    
 }
 @end

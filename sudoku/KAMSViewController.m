@@ -24,7 +24,7 @@ static NSString *END_GAME_ALERT_MESSAGE =
     @"Press \"Play Again\" to start another round.";
 static NSString *END_GAME_ALERT_CANCEL_BUTTON_TITLE = @"Play Again?";
 
-static float TIME_FRAME_WIDTH = 100;
+static float TIME_FRAME_WIDTH = 200;
 static float TIME_FRAME_Y_POSITION = 25;
 
 @interface KAMSViewController () {
