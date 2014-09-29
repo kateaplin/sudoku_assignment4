@@ -94,7 +94,8 @@ static float NUMPAD_CORNER_RADIUS = 30.0;
         imageWithColor:[UIColor whiteColor]] forState:UIControlStateNormal];
     UIButton *newCell = [_numberCells objectAtIndex:newCellIndex];
     [newCell setBackgroundImage:[KAMSSolidImageUtility
-        imageWithColor:[KAMSNumPadView highlightColor]] forState:UIControlStateNormal];
+        imageWithColor:[KAMSNumPadView highlightColor]]
+        forState:UIControlStateNormal];
     _currentValue = newCellIndex;
 }
 
