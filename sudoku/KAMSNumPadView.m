@@ -16,7 +16,7 @@
     SEL _action;
 }
 
-static float BORDER_RATIO = 0.5;
+static float BORDER_RATIO = 0.35;
 static int CELL_FONT_SIZE = 35;
 static float NUMPAD_CORNER_RADIUS = 30.0;
 
@@ -29,13 +29,13 @@ static float NUMPAD_CORNER_RADIUS = 30.0;
         self.backgroundColor = [UIColor blackColor];
         
         CGFloat width = CGRectGetWidth(frame);
-        CGFloat effectiveNumButtons = 9
-        + (BORDER_RATIO * 10);
+        CGFloat effectiveNumButtons = 10
+            + (BORDER_RATIO * 11);
         
         CGFloat buttonSize = width / effectiveNumButtons;
-        int offsetY = BORDER_RATIO * buttonSize;
-        for (int i = 1; i <= 9; i++) {
-            int offsetX = ((BORDER_RATIO * i) + (i - 1)) * buttonSize;
+        int offsetY = (CGRectGetHeight(frame) / 2) - (buttonSize / 2);
+        for (int i = 0; i <= 9; i++) {
+            int offsetX = ((BORDER_RATIO * (i + 1)) + i) * buttonSize;
             CGRect buttonFrame = CGRectMake(offsetX, offsetY, buttonSize,
                 buttonSize);
             UIButton *numberCell = [[UIButton alloc]
@@ -45,8 +45,12 @@ static float NUMPAD_CORNER_RADIUS = 30.0;
             [numberCell setBackgroundImage:[KAMSSolidImageUtility
                 imageWithColor:[UIColor whiteColor]]
                 forState:UIControlStateNormal];
-            [numberCell setTitle:[NSString stringWithFormat:@"%d", i]
-                forState:UIControlStateNormal];
+            if (i != 0) {
+                [numberCell setTitle:[NSString stringWithFormat:@"%d", i]
+                    forState:UIControlStateNormal];
+            } else {
+                [numberCell setTitle:@"X" forState:UIControlStateNormal];
+            }
             [numberCell setTitleColor:[UIColor blackColor]
                 forState:UIControlStateNormal];
             [numberCell.titleLabel setFont:[KAMSNumPadView cellFontStyle]];
@@ -85,10 +89,10 @@ static float NUMPAD_CORNER_RADIUS = 30.0;
 
 -(void)setCellActive:(int)newCellIndex
 {
-    UIButton *previousCell = [_numberCells objectAtIndex:_currentValue - 1];
+    UIButton *previousCell = [_numberCells objectAtIndex:_currentValue];
     [previousCell setBackgroundImage:[KAMSSolidImageUtility
         imageWithColor:[UIColor whiteColor]] forState:UIControlStateNormal];
-    UIButton *newCell = [_numberCells objectAtIndex:newCellIndex - 1];
+    UIButton *newCell = [_numberCells objectAtIndex:newCellIndex];
     [newCell setBackgroundImage:[KAMSSolidImageUtility
         imageWithColor:[KAMSNumPadView highlightColor]] forState:UIControlStateNormal];
     _currentValue = newCellIndex;
